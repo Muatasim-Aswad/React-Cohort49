@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Category = ({ name, isActive, changeCategory }) => {
-  const handleClick = () => changeCategory(name);
+const Category = ({ name, isCurrent, changeCurrentCategory }) => {
+  const handleClick = () => changeCurrentCategory(name);
 
-  const active = isActive ? 'active' : '';
+  const active = isCurrent ? 'active' : '';
 
   return (
     <button onClick={handleClick} className={`category ${active}`}>

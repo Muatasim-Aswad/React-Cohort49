@@ -1,32 +1,26 @@
 import React, { useState } from 'react';
-import Categories from './Categories';
-import Products from './Products';
+import Categories from './CategoriesProducts/Categories';
+import Products from './CategoriesProducts/Products';
 import products from '../fake-data/all-products';
-import fakeCategories from '../fake-data/all-categories';
-
-const categories = fakeCategories.map((category) =>
-  category.replace('FAKE: ', ''),
-);
+import categories from '../fake-data/prepared-categories';
 
 const ContainerCategoriesProducts = () => {
-  const [category, setCategory] = useState(categories[0]);
-
-  const changeCategory = (newCategory) => {
-    setCategory(newCategory);
-  };
+  const [currentCategory, setCurrentCategory] = useState(categories[0].name);
+  const changeCurrentCategory = (newCategory) =>
+    newCategory !== currentCategory && setCurrentCategory(newCategory);
 
   const filteredProducts = products.filter(
-    (product) => category === product.category,
+    (product) => currentCategory === product.category,
   );
 
   return (
     <div className="container">
       <Categories
         categories={categories}
-        currentCategory={category}
-        changeCategory={changeCategory}
+        currentCategory={currentCategory}
+        changeCurrentCategory={changeCurrentCategory}
       />
-      <Products currentCategory={category} products={filteredProducts} />
+      <Products products={filteredProducts} />
     </div>
   );
 };
