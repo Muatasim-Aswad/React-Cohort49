@@ -5,13 +5,15 @@ import products from '../fake-data/all-products';
 import categories from '../fake-data/prepared-categories';
 
 const ContainerCategoriesProducts = () => {
-  const [currentCategory, setCurrentCategory] = useState(categories[0].name);
+  const [currentCategory, setCurrentCategory] = useState('');
   const changeCurrentCategory = (newCategory) =>
-    newCategory !== currentCategory && setCurrentCategory(newCategory);
+    newCategory === currentCategory
+      ? setCurrentCategory('')
+      : setCurrentCategory(newCategory);
 
-  const filteredProducts = products.filter(
-    (product) => currentCategory === product.category,
-  );
+  const productsToDisplay = !currentCategory
+    ? products
+    : products.filter((product) => currentCategory === product.category);
 
   return (
     <div className="container">
@@ -20,7 +22,7 @@ const ContainerCategoriesProducts = () => {
         currentCategory={currentCategory}
         changeCurrentCategory={changeCurrentCategory}
       />
-      <Products products={filteredProducts} />
+      <Products products={productsToDisplay} />
     </div>
   );
 };
