@@ -1,4 +1,3 @@
-import React from 'react';
 import Category from './Category';
 
 const Categories = ({ categories, currentCategory, changeCurrentCategory }) => {
@@ -6,9 +5,9 @@ const Categories = ({ categories, currentCategory, changeCurrentCategory }) => {
     <div className="categories">
       {categories.map((category) => (
         <Category
-          key={category.id}
-          name={category.name}
-          isCurrent={category.name === currentCategory}
+          key={category}
+          name={category}
+          isCurrent={category === currentCategory}
           changeCurrentCategory={changeCurrentCategory}
         />
       ))}
